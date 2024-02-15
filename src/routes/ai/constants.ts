@@ -8,6 +8,15 @@ export const OPENAI_SERVICE_PROVIDERS = [
     requires_better_ai: true,
     features: ['chat', 'quick_ai', 'commands', 'api'],
   },
+  {
+    id: 'openai-gpt-4-1106-preview',
+    model: 'gpt-4-1106-preview',
+    name: 'GPT-4 Turbo',
+    provider: 'openai',
+    provider_name: 'OpenAI',
+    requires_better_ai: true,
+    features: ['chat', 'quick_ai', 'commands', 'api'],
+  },
 ]
 
 export const GEMINI_SERVICE_PROVIDERS = [
