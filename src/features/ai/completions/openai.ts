@@ -5,10 +5,13 @@ import type { ChatCompletionChunk } from 'openai/resources/index.mjs'
 import type { Stream } from 'openai/streaming.mjs'
 import { getConfig } from '../../../utils/env.util'
 import type { RaycastCompletions } from '../../../types/raycast/completions'
+import { getApiKey } from './api-key'
 
 export async function OpenAIChatCompletion(request: FastifyRequest, reply: FastifyReply) {
   const aiConfig = getConfig('ai')
   const openaiConfig = getConfig('ai')?.openai
+
+  const apiKey = getApiKey(request, aiConfig, openaiConfig) || ''
 
   const body = request.body as RaycastCompletions
 
@@ -61,7 +64,7 @@ export async function OpenAIChatCompletion(request: FastifyRequest, reply: Fasti
   if (openaiConfig?.isAzure) {
     const azureOpenai = new OpenAIClient(
       openaiConfig!.baseUrl!,
-      new AzureKeyCredential(openaiConfig!.apiKey!),
+      new AzureKeyCredential(apiKey),
     )
     stream = await azureOpenai.streamChatCompletions(
       openaiConfig.azureDeploymentName || body.model,
@@ -78,7 +81,7 @@ export async function OpenAIChatCompletion(request: FastifyRequest, reply: Fasti
   else {
     const openai = new OpenAI({
       baseURL: openaiConfig?.baseUrl,
-      apiKey: openaiConfig?.apiKey,
+      apiKey,
     })
 
     stream = await openai.chat.completions.create({

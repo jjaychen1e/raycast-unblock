@@ -5,12 +5,15 @@ export interface AIConfig {
   openai?: OpenAIServiceConfig
   gemini?: GeminiServiceConfig
   copilot?: CopilotServiceConfig
+  usersApiKeyCustomizationEnabled?: boolean
 }
 export interface AIServiceConfig {
   disable?: boolean
   apiKey?: string
   maxTokens?: number
   temperature?: number
+  usersApiKeyCustomizationEnabled?: boolean
+  userApiKeys?: { [key: string]: string }
 }
 export interface OpenAIServiceConfig extends AIServiceConfig {
   baseUrl?: string

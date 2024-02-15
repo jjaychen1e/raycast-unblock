@@ -2,11 +2,13 @@ import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/ge
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { getConfig } from '../../../utils/env.util'
 import type { RaycastCompletions } from '../../../types/raycast/completions'
+import { getApiKey } from './api-key'
 
 export async function GeminiChatCompletion(request: FastifyRequest, reply: FastifyReply) {
   const aiConfig = getConfig('ai')
   const config = getConfig('ai')?.gemini
-  const genAI = new GoogleGenerativeAI(config?.apiKey || '')
+  const apiKey = getApiKey(request, aiConfig, config) || ''
+  const genAI = new GoogleGenerativeAI(apiKey)
   const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
 
   const body = request.body as RaycastCompletions

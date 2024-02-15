@@ -6,6 +6,7 @@ import { copilotClient } from '../../../utils'
 import { processStream } from '../../../utils/stream-reader.util'
 import type { RaycastCompletions } from '../../../types/raycast/completions'
 import { getConfig } from '../../../utils/env.util'
+import { getApiKey } from './api-key'
 
 const completions = '/chat/completions'
 
@@ -14,7 +15,8 @@ export async function CopilotChatCompletion(request: FastifyRequest, reply: Fast
   const aiConfig = getConfig('ai')
   const config = getConfig('ai')?.copilot
 
-  const app_token = config?.apiKey
+  const app_token = getApiKey(request, aiConfig, config)
+
   if (!app_token) {
     consola.error(`[Copilot] Auth error: Missing token`)
     throw new Error('Unauthorized. Missing token')
