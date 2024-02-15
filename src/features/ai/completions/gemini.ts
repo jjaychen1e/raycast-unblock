@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/generative-ai'
 import type { FastifyReply, FastifyRequest } from 'fastify'
+import consola from 'consola'
 import { getConfig } from '../../../utils/env.util'
 import type { RaycastCompletions } from '../../../types/raycast/completions'
 import { getApiKey } from './api-key'
@@ -7,7 +8,13 @@ import { getApiKey } from './api-key'
 export async function GeminiChatCompletion(request: FastifyRequest, reply: FastifyReply) {
   const aiConfig = getConfig('ai')
   const config = getConfig('ai')?.gemini
-  const apiKey = getApiKey(request, aiConfig, config) || ''
+  const apiKey = getApiKey(request, aiConfig, config)
+
+  if (!apiKey) {
+    consola.error(`[Gemini] Auth error: Missing api key`)
+    throw new Error('Unauthorized. Missing api key')
+  }
+
   const genAI = new GoogleGenerativeAI(apiKey)
   const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
 

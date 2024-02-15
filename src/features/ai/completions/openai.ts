@@ -3,6 +3,7 @@ import { AzureKeyCredential, type ChatCompletions, type EventStream, OpenAIClien
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import type { ChatCompletionChunk } from 'openai/resources/index.mjs'
 import type { Stream } from 'openai/streaming.mjs'
+import consola from 'consola'
 import { getConfig } from '../../../utils/env.util'
 import type { RaycastCompletions } from '../../../types/raycast/completions'
 import { getApiKey } from './api-key'
@@ -11,7 +12,12 @@ export async function OpenAIChatCompletion(request: FastifyRequest, reply: Fasti
   const aiConfig = getConfig('ai')
   const openaiConfig = getConfig('ai')?.openai
 
-  const apiKey = getApiKey(request, aiConfig, openaiConfig) || ''
+  const apiKey = getApiKey(request, aiConfig, openaiConfig)
+
+  if (!apiKey) {
+    consola.error(`[OpenAI] Auth error: Missing api key`)
+    throw new Error('Unauthorized. Missing api key')
+  }
 
   const body = request.body as RaycastCompletions
 
