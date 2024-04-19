@@ -9,7 +9,7 @@ import { GroqWebCompletions } from '../../features/ai/completions/groq-web'
 export async function Completions(request: FastifyRequest, reply: FastifyReply) {
   const body = request.body as RaycastCompletions
   const config = getConfig('ai')
-  const provider = (body.provider || config?.default?.toLowerCase()) as keyof typeof config
+  const provider = (PreprocessProdiver(body.provider) || config?.default?.toLowerCase()) as keyof typeof config
   if (!(config && provider && config[provider] && !(config[provider] as any).disabled)) {
     consola.warn(`Completions not supported for this model. Please check your config. provider: ${provider}`)
     reply.status(400).send({
@@ -38,4 +38,9 @@ export async function Completions(request: FastifyRequest, reply: FastifyReply) 
   catch (err) {
     consola.error(err)
   }
+}
+
+function PreprocessProdiver(provider: string): string {
+  if (provider.endsWith('-web-search'))
+    return provider.slice(0, -10)
 }
