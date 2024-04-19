@@ -11,6 +11,7 @@ import type { RaycastCompletions } from '../../../types/raycast/completions'
 import { getFunctionCallToolsConfig } from '../functions'
 import { AvailableFunctions } from '../functions/functions'
 import { Debug } from '../../../utils/log.util'
+import { OPENAI_SERVICE_PROVIDERS } from '../../../routes/ai/constants'
 import { getApiKey } from './api-key'
 
 export async function OpenAIChatCompletion(request: FastifyRequest, reply: FastifyReply) {
@@ -110,6 +111,7 @@ export async function OpenAIChatCompletion(request: FastifyRequest, reply: Fasti
       body.web_search_tool
       && !aiConfig?.functions?.disable
       && functionToolsConfig.length > 0
+      && IsWebSearchAvailable(body.model)
     ) {
       Debug.info(`[AI] Function call tools: `, functionToolsConfig)
       Debug.info(`[AI] Web Search Tool option is on.`)
@@ -221,4 +223,9 @@ export async function OpenAIChatCompletion(request: FastifyRequest, reply: Fasti
       }
     })())
   }
+}
+
+function IsWebSearchAvailable(model: string): boolean {
+  const result = OPENAI_SERVICE_PROVIDERS.find(provider => provider.model === model)
+  return result !== undefined && result.capabilities.web_search === 'full'
 }
