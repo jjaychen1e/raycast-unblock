@@ -42,7 +42,7 @@ export async function Completions(request: FastifyRequest, reply: FastifyReply) 
 
 function PreprocessProdiver(provider: string): string {
   if (provider.endsWith('-web-search'))
-    return provider.slice(0, -10)
+    return provider.slice(0, -11)
 
   return provider
 }
