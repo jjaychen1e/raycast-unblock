@@ -13,6 +13,7 @@ const completions = '/chat/completions'
 export async function CopilotChatCompletion(request: FastifyRequest, reply: FastifyReply) {
   const body = request.body as RaycastCompletions
   const aiConfig = getConfig('ai')
+  // @ts-expect-error removed
   const config = getConfig('ai')?.copilot
 
   const app_token = getApiKey(request, aiConfig, config)

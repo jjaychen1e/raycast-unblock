@@ -8,6 +8,9 @@ on:
       - README.md
       - LICENSE
       - .github/workflows/release.yml
+      - .github/workflows/docker.yml
+      - .github/workflows/deploy.yml
+      - docs/**
   pull_request:
     branches:
       - main

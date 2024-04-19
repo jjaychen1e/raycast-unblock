@@ -1,11 +1,15 @@
 FROM --platform=$BUILDPLATFORM node:21-alpine as builder
 
+RUN apk add make g++ alpine-sdk python3 py3-pip
+RUN npm i -g pnpm@8.15.1
+
 WORKDIR /app
 
-COPY . .
-RUN apk add make g++ alpine-sdk python3 py3-pip
-RUN npm i -g pnpm
+COPY package.json pnpm-lock.yaml ./
+COPY patches ./patches
 RUN pnpm install
+
+COPY . .
 RUN pnpm build
 RUN pnpm build:rollup
 RUN pnpm bundle
