@@ -21,12 +21,21 @@ export const OPENAI_SERVICE_PROVIDERS: RaycastAIModels = [
   },
   {
     id: 'openai-gpt-4-1106-preview',
-    model: 'gpt-4-1106-preview',
+    description: 'GPT-4 Turbo is OpenAI’s most advanced model',
+    model: 'gpt-4-turbo',
     name: 'GPT-4 Turbo',
+    features: ['chat', 'quick_ai', 'commands', 'api', 'emoji_search'],
+    speed: 3,
+    intelligence: 3,
     provider: 'openai',
     provider_name: 'OpenAI',
+    provider_brand: 'openai',
     requires_better_ai: true,
-    features: ['chat', 'quick_ai', 'commands', 'api'],
+    context: 16,
+    capabilities: { image_generation: 'full', web_search: 'full' },
+    suggestions: ['chat', 'quick_ai', 'commands'],
+    in_better_ai_subscription: true,
+    status: null,
   },
 ]
 

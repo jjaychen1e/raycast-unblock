@@ -4,12 +4,14 @@ import type { ChatChoice, ChatCompletions, EventStream } from '@azure/openai'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import type { ChatCompletionChunk } from 'openai/resources/index.mjs'
 import type { Stream } from 'openai/streaming.mjs'
+import consola from 'consola'
 import destr from 'destr'
 import { getConfig } from '../../../utils/env.util'
 import type { RaycastCompletions } from '../../../types/raycast/completions'
 import { getFunctionCallToolsConfig } from '../functions'
 import { AvailableFunctions } from '../functions/functions'
 import { Debug } from '../../../utils/log.util'
+import { getApiKey } from './api-key'
 
 export async function OpenAIChatCompletion(request: FastifyRequest, reply: FastifyReply) {
   const aiConfig = getConfig('ai')
