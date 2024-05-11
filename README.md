@@ -19,11 +19,36 @@ We only borrowed the **operation interface** of Raycast, and **did not modify th
 
 We just coded a proxy server to forward Raycast's requests to our proxy server, and **implemented similar functions** in Raycast Pro Plan **in other ways**.
 
-You can see all the code in the `src` directory. If you have any questions, please feel free to ask.
-
 ## Getting Started
 
 Please follow the documentation at [wibus-wee.github.io/raycast-unblock](https://wibus-wee.github.io/raycast-unblock/)!
+
+## Repo Structure
+
+It's a monorepo managed by [pnpm](https://pnpm.io/).
+
+- [core](./packages/core/) - The Raycast Unblock program.
+- [docs](./packages/docs/) - The documentation.
+- [raycast](./packages/raycast/) - The Raycast extension.
+- [shared](./packages/shared/) - Shared code between packages.
+
+## Related Projects
+
+Here are some similar projects to this one, welcome to check:
+
+- [ourongxing/fake-raycast-backend](https://github.com/ourongxing/fake-raycast-backend) - A fake Raycast backend that can be deployed to Vercel in just one step. *(Based on this project)*
+- [zhuozhiyongde/Unlocking-Raycast-With-Surge](https://github.com/zhuozhiyongde/Unlocking-Raycast-With-Surge) - Utilize Surge's MiTM capability to intercept requests and leverage Docker services to emulate backend operations, enabling the activation of Raycast.
+- [yufeikang/raycast_api_proxy](https://github.com/yufeikang/raycast_api_proxy) - This is a simple Raycast AI API proxy.
+
+## Star History
+
+<a href="https://star-history.com/#wibus-wee/raycast-unblock&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=wibus-wee/raycast-unblock&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=wibus-wee/raycast-unblock&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=wibus-wee/raycast-unblock&type=Date" />
+ </picture>
+</a>
 
 ## Author
 

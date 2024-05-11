@@ -1,6 +1,7 @@
 OS=''
 TMP_NODE=./dist/node-tmp
 
+mkdir -p ./dist
 if [ "$(uname)" == "Darwin" ]; then
     OS='mac'
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
@@ -10,7 +11,7 @@ fi
 echo "OS: $OS"
 echo "TMP_NODE: $TMP_NODE"
 
-node --experimental-sea-config sea-config.json
+node --experimental-sea-config ./packages/core/sea-config.json
 cp $(command -v node) $TMP_NODE
 chmod 777 $TMP_NODE
 
@@ -27,6 +28,7 @@ if [ "$OS" == "linux" ]; then
     --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2
 fi
 
-mv $TMP_NODE dist/raycast-unblock-app
+mv $TMP_NODE ./dist/raycast-unblock-app
+
 
 echo "Done"

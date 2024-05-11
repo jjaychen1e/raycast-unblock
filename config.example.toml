@@ -12,10 +12,6 @@ logger = false
 # If you want the service to listen to the changes of the configuration file and update automatically,
 # you can set watch to true
 watch = false
-# The location of the sync file, default is "icloud", and you can also set it to "local"
-# # The iCloud storage solution is only effective when deployed on the macOS client
-# # **iCloud storage solution** is the *default* option in *macOS* deployments
-sync = "icloud" # icloud / local
 
 [General.Https]
 # If you want to use HTTPS, you can set the following configuration
@@ -83,7 +79,7 @@ api_key = "YOUR_API_KEY"
 # speed = 3  # if it's not provided, the default value will be used.
 # intelligence = 3  # if it's not provided, the default value will be used.
 # context = 8  # if it's not provided, the default value will be used.
-# status = beta
+# status = "beta"
 # [AI.OpenAI.Models.GPT4.Capabilities] # Features control
 # image_generation = true # Not supported yet
 # web_search = true # The premise is that the model needs to support Function Call.
@@ -97,6 +93,10 @@ api_key = "YOUR_API_KEY"
 api_key = ""
 # temperature = 0.5
 # max_tokens = 100
+
+[AI.Cohere]
+email = ""
+password = ""
 
 [Translate]
 # You can choose the default translation service from the following:
@@ -132,5 +132,9 @@ base_url = "https://libretranslate.com"
 type = "reserve"
 # If you choose api, you should set the api_key
 api_key = ""
-# The following is for the legacy configuration
-# They will be removed in the future
+
+[Sync]
+# The location of the sync file, default is "icloud", and you can also set it to "local"
+# # The iCloud storage solution is only effective when deployed on the macOS client
+# # **iCloud storage solution** is the *default* option in *macOS* deployments
+type = "icloud" # icloud / local
