@@ -20,7 +20,7 @@ export async function OpenAIChatCompletion(request: FastifyRequest, reply: Fasti
   const aiConfig = getConfig('ai')
   const openaiConfig = getConfig('ai')?.openai
 
-  const apiKey = getApiKey(request, aiConfig, openaiConfig)
+  let apiKey = getApiKey(request, aiConfig, openaiConfig)
 
   if (!apiKey) {
     consola.error(`[OpenAI] Auth error: Missing api key`)
@@ -100,7 +100,7 @@ export async function OpenAIChatCompletion(request: FastifyRequest, reply: Fasti
     const modelKey = Object.keys(openaiConfig?.models || {}).find(key => openaiConfig?.models?.[key].id === body.model) || body.model
     const model = openaiConfig?.models?.[modelKey]
     const baseURL = model?.baseUrl || openaiConfig?.baseUrl
-    const apiKey = model?.apiKey || openaiConfig?.apiKey
+    apiKey = model?.apiKey || apiKey
     const modelId = model?.realId || body.model
     if (model?.baseUrl)
       debug.info(`Using custom base URL: ${model.baseUrl} --> ${model.id} --> ${model.realId}`)
