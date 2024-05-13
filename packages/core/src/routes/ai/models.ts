@@ -16,7 +16,11 @@ function generateRaycastAIServiceProviders() {
 
         for (const [key, val] of Object.entries(value.capabilities || {})) {
           const _key = toSnakeCase(key)
-          capabilities[_key] = val ? 'full' : undefined
+          // capabilities[_key] = val ? 'full' : undefined
+          if (val === true)
+            capabilities[_key] = 'full'
+          else
+            continue
         }
 
         return ({
@@ -32,7 +36,7 @@ function generateRaycastAIServiceProviders() {
           capabilities,
           context: Number(value.context) || 16,
           features: ['chat', 'quick_ai', 'commands', 'api', 'emoji_search'],
-          suggestions: ['chat', 'quick_ai', 'commands'],
+          suggestions: [],
           in_better_ai_subscription: false,
           requires_better_ai: false,
           // status: value.status || undefined,
@@ -61,11 +65,10 @@ function generateRaycastAIServiceProviders() {
           toggleable: boolean
         }
       } = {}
-      // for (const [key] of Object.entries(model.capabilities || {})) {
-      //   const _key = toSnakeCase(key)
-      //   abilities[key] = { toggleable: true }
-      // }
-      abilities.web_search = { toggleable: true }
+      for (const [key] of Object.entries(model.capabilities || {})) {
+        const _key = toSnakeCase(key)
+        abilities[_key] = { toggleable: true }
+      }
       model.abilities = abilities
     })
   })
