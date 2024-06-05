@@ -58,11 +58,11 @@
     "lint-staged": "^15.2.5",
     "pnpm": "^9.0.6",
     "simple-git-hooks": "^2.11.1",
-    "tslib": "^2.6.2",
+    "tslib": "^2.6.3",
     "typescript": "^5.4.5"
   },
   "resolutions": {
-    "@babel/traverse": "7.24.6"
+    "@babel/traverse": "7.24.7"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
