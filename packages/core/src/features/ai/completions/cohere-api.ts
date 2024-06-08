@@ -2,6 +2,7 @@ import type { FastifyReply, FastifyRequest } from 'fastify'
 import { CohereClient } from 'cohere-ai'
 import type { ChatMessageRole } from 'cohere-ai/api'
 import type { RaycastCompletions } from '@ru/shared'
+import destr from 'destr'
 import { getConfig } from '../../../utils/env.util'
 import { Debug } from '../../../utils/log.util'
 
@@ -52,6 +53,11 @@ export async function CohereAPICompletions(request: FastifyRequest, reply: Fasti
           }]
         : [],
     ],
+  }).catch((e) => {
+    const error = e.body.read().toString()
+    throw new Error(destr<{
+      message: string
+    }>(error).message)
   })
 
   return reply.sse((async function* source() {
