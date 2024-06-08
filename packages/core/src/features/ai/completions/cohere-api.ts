@@ -45,7 +45,8 @@ export async function CohereAPICompletions(request: FastifyRequest, reply: Fasti
     message: chatHistory[chatHistory.length - 1].message, // The last message
     maxTokens: body.max_tokens,
     connectors: [
-      ...raycastBody.web_search_tool
+      // RAG is not supported for c4ai-aya-23
+      ...raycastBody.web_search_tool && raycastBody.model !== 'c4ai-aya-23'
         ? [{
             id: 'web-search',
           }]
