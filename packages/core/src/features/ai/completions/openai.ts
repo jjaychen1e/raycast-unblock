@@ -177,6 +177,12 @@ export async function OpenAIChatCompletion(request: FastifyRequest, reply: Fasti
           yield { data: mes }
 
         for await (const data of stream) {
+          // https://github.com/wibus-wee/raycast-unblock/issues/96
+          // Cannot read properties of undefined (reading 'delta')
+          // In OpenAI JS SDK, the data.choices[0].delta is always available.
+          // But in the real response, it may not be available.
+          if (!data.choices || !data.choices[0] || !data.choices[0].delta)
+            continue
           const { choices: [{ delta: { content } }] } = data
           const choice = data.choices[0]
           if (!choice)
@@ -189,7 +195,7 @@ export async function OpenAIChatCompletion(request: FastifyRequest, reply: Fasti
           else
             finish_reason = (choice as ChatChoice).finishReason
 
-          if (!content && !finish_reason)
+          if (!content || !finish_reason)
             continue // ignore this line
           const res: Record<string, unknown> = { text: content || '' }
           if (finish_reason) {
