@@ -43,6 +43,8 @@
     "typecheck:ray": "pnpm -C packages/raycast run typecheck",
     "typecheck:shared": "pnpm -C packages/shared run typecheck",
     "typecheck": "pnpm typecheck:core && pnpm typecheck:ray && pnpm typecheck:shared",
+    "test": "pnpm test:core",
+    "test:core": "pnpm -C packages/core test",
     "release": "bumpp",
     "prepare": "simple-git-hooks"
   },
@@ -59,7 +61,8 @@
     "pnpm": "^9.0.6",
     "simple-git-hooks": "^2.11.1",
     "tslib": "^2.6.3",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
   },
   "resolutions": {
     "@babel/traverse": "7.24.7",

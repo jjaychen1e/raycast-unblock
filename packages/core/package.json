@@ -29,7 +29,8 @@
     "dev": "pnpm start:dev",
     "start": "esno src/index.ts",
     "start:dev": "esno watch src/index.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
   },
   "dependencies": {
     "@azure/openai": "1.0.0-beta.12",
