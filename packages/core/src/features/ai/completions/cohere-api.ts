@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
+import type { Cohere } from 'cohere-ai'
 import { CohereClient } from 'cohere-ai'
-import type { ChatMessageRole } from 'cohere-ai/api'
 import type { RaycastCompletions } from '@ru/shared'
 import destr from 'destr'
 import { getConfig } from '../../../utils/env.util'
@@ -24,13 +24,13 @@ export async function CohereAPICompletions(request: FastifyRequest, reply: Fasti
   const chatHistory = chat.map((message) => {
     if (message.role === 'assistant') {
       return {
-        role: 'CHATBOT' as ChatMessageRole,
+        role: 'CHATBOT',
         message: message.content,
       }
     }
     else {
       return {
-        role: message.role.toUpperCase() as ChatMessageRole,
+        role: message.role.toUpperCase(),
         message: message.content,
       }
     }
@@ -42,7 +42,7 @@ export async function CohereAPICompletions(request: FastifyRequest, reply: Fasti
     model: body.model,
     p: body.top_p,
     temperature: body.temperature,
-    chatHistory: chatHistory.slice(0, -1), // Remove the last message
+    chatHistory: chatHistory.slice(0, -1) as Cohere.Message[], // Remove the last message
     message: chatHistory[chatHistory.length - 1].message, // The last message
     maxTokens: body.max_tokens,
     connectors: [
