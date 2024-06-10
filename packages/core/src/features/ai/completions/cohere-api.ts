@@ -42,7 +42,7 @@ export async function CohereAPICompletions(request: FastifyRequest, reply: Fasti
     model: body.model,
     p: body.top_p,
     temperature: body.temperature,
-    chatHistory: chatHistory.slice(0, -1) as Cohere.Message[], // Remove the last message
+    chatHistory: chatHistory.slice(0, -1) as Cohere.ChatMessage[], // Remove the last message
     message: chatHistory[chatHistory.length - 1].message, // The last message
     maxTokens: body.max_tokens,
     connectors: [
