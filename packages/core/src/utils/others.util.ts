@@ -35,7 +35,7 @@ export function toCamelCase(str: string) {
   if (!str.includes('_') && !str.includes('-'))
     return str
 
-  return str.replace(/([-_][a-z])/ig, ($1) => {
+  return str.replace(/([-_][a-z])/gi, ($1) => {
     return $1.toUpperCase()
       .replace('-', '')
       .replace('_', '')
