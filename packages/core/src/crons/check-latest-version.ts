@@ -1,6 +1,6 @@
 import consola from 'consola'
 import destr from 'destr'
-import { httpClient } from '../utils'
+import { ofetch } from 'ofetch'
 import { Debug } from '../utils/log.util'
 import { PACKAGE_JSON } from '../constants'
 
@@ -9,7 +9,7 @@ export function checkLatestVersion() {
   debug.info('Checking the latest version...')
   const currentVersion = PACKAGE_JSON.version
   const url = 'https://raw.githubusercontent.com/wibus-wee/raycast-unblock/main/package.json'
-  httpClient(url, {
+  ofetch(url, {
     method: 'GET',
   }).then((res) => {
     res = destr(res)
