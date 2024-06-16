@@ -1,15 +1,23 @@
-# Groq Web <Badge type="tip" text="^0.4.0-beta.0" />
+# Groq Web <Badge type="tip" text="^0.4.0-beta.0" /> <Badge type="danger" text="Deprecated" />
 
 Raycast Unblock offers Groq Web AI support. You can use Groq's models for free via their Web API.
+
+::: warning
+Unfortunately, the cost of bypassing Cloudflare protection on the NodeJS platform is unacceptable in this project. **Therefore, we are unable to provide support for Groq Web AI.**
+:::
+
+---
 
 ::: danger
 We found *Cloudflare protection*, which caused our program to fail to interact with `api.groq.com` normally. You can go to [wibus-wee/raycast-unblock#72](https://github.com/wibus-wee/raycast-unblock/issues/72) for more details.
 
-We will try to solve this problem as soon as possible. **_You can't use this feature until we fix it._**
+~~We will try to solve this problem as soon as possible. _You can't use this feature until we fix it._~~
 :::
 
 ::: warning
-This is an inverted API. Please use with caution.
+~~This is an inverted API. Please use with caution.~~
+
+The following content is no longer maintained and is for reference only.
 :::
 
 ## Usage
