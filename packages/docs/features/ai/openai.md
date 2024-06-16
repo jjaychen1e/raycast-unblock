@@ -69,8 +69,6 @@ Also, `api_key` and `real_id` parameters are used for the same purpose. You can 
   - Actually, the request will be sent to `https://another-endpoint.com/v1/chat/completions`, and model id will be `gpt-4-0125-preview`.
 :::
 
-:::
-
 ### Example
 
 ```toml
