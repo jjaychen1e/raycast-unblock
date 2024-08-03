@@ -4,7 +4,7 @@
 
 import { ReadableStream, TextDecoderStream } from 'node:stream/web'
 
-const responseLineRE = /^data\: (.*)(?:\n\n|\r\r|\r\n\r\n)/
+const responseLineRE = /^data: (.*)(?:\n\n|\r\r|\r\n\r\n)/
 
 export function processStream(response: Response) {
   const input = response.body!.pipeThrough(

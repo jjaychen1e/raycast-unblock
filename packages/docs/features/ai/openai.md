@@ -34,6 +34,7 @@ Other parameters you can see in the example below.
     - `base_url`: The base URL of the model. <Badge type="info" text="Optional" /> <Badge type="warning" text="^v0.5.0-beta.2" />
     - `api_key`: The API key of the model. <Badge type="info" text="Optional" /> <Badge type="warning" text="^v0.5.0-beta.2" />
     - `real_id`: The real id of the model. <Badge type="info" text="Optional" /> <Badge type="warning" text="^v0.5.0-beta.2" />
+    - `provider_name`: The provider name of the model. <Badge type="info" text="Optional" /> <Badge type="warning" text="^v0.5.0-beta.2" />
     - `id`: The model id. It should be unique.
     - `model`: The model name.
     - `name`: The model name.
@@ -66,8 +67,6 @@ Also, `api_key` and `real_id` parameters are used for the same purpose. You can 
   - real_id: `gpt-4-0125-preview`
   - base_url: `https://another-endpoint.com/v1`
   - Actually, the request will be sent to `https://another-endpoint.com/v1/chat/completions`, and model id will be `gpt-4-0125-preview`.
-:::
-
 :::
 
 ### Example

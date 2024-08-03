@@ -12,7 +12,7 @@ Raycast Unblock's request **_cannot be processed_** by Rewrite Header, or it wil
 
 For example, in Surge, you can add content like the following to your configuration file:
 
-```txt
+```ini
 [URL Rewrite]
 https:\/\/backend.raycast.com http://192.168.x.x:3000 header
 ```
@@ -40,17 +40,31 @@ def request(flow: http.HTTPFlow) -> None:
 3. Run mitmproxy: `mitmproxy -s mitm.py`.
 4. Open Raycast and use the features in the Pro Plan.
 
-## Use it with Surge Scripts (Not recommend)
+## Use it with Surge Scripts
 
 > [!NOTE]
 > In some cases, if you find that Raycast Unblock is not working properly, please go to the settings of Surge, and uncheck the last line `*` in `Surge -> HTTP -> Capture(捕获) -> Capture MITM Overrides(捕获 MITM 覆写)`, which is `Modify MITM Hostname`.
 
-1. Go to [wibus-wee/activation-script](https://github.com/wibus-wee/activation-script) and follow the installation instructions.
-2. Run Raycast Unblock and Surge.
-3. Open Raycast and use the features in the Pro Plan.
+1. Add `backend.raycast.com` to the MITM list in Surge.
+2. Add the following script in Surge:
 
-> [!tip]
-> Currently, `activation-script` will not forward the requests of `Translate` and `me` to Raycast Unblock by default. Instead, it will immediately forward the requests to DeepL or handle them itself in the script. You need to modify the code manually. Please refer to the documentation of activation-script for details.
+```ini
+[MITM]
+raycast-unblock-backend.raycast.com = type=http-request,pattern=^https://backend.raycast.com/*,requires-body=1,max-size=0,debug=1,script-path=raycast-unblock.js
+```
+
+3. Create a file named `raycast-unblock.js` in the same directory as the configuration file, and add the following content:
+
+```js{4}
+if ($request.headers['x-raycast-unblock'])
+  $done()
+$done({
+  url: $request.url.replace('https://backend.raycast.com', 'http://localhost:3000'),
+})
+```
+
+> [!TIP]
+> if you want to use the remote backend, you can replace `http://localhost:3000` with the remote backend address.
 
 ## If you don't have Surge
 
@@ -58,7 +72,7 @@ You need to throw all Raycast requests to the backend built by this project, but
 
 1. You can use Rewrite Header to implement this function - [Universal Solution](#universal-solution).
 
-2. You can refer to the code in [wibus-wee/activation-script](https://github.com/wibus-wee/activation-script) and port it to other agent tools to continue using MiTM to hijack.
+2. You can refer to the code in [Use it with Surge Scripts](#use-it-with-surge-scripts-not-recommend) and port it to other agent tools to continue using MiTM to hijack.
 
 3. You can edit the `/etc/hosts` file to implement interception, but this method only supports Raycast Unblock deployments in remote locations. - [Hosts](#hosts)
 
@@ -74,8 +88,6 @@ Or you can deploy the backend to a remote server, and this will not be a problem
 Raycast Unblock adds an `x-raycast-unblock` header to requests to Raycast Backend.
 
 You can determine whether this is a request from Raycast or Raycast Unblock by the presence of this header, and make the backend service work properly through conditional judgment.
-
-[Related Code in activation-script](https://github.com/wibus-wee/activation-script/blob/main/src/modules/index.ts#L70-L89)
 
 ## Hosts
 

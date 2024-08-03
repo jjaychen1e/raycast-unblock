@@ -40,7 +40,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@raycast/api": "^1.71.4",
+    "@raycast/api": "^1.76.0",
     "@raycast/utils": "^1.15.0",
     "valtio": "^1.13.2"
   },
