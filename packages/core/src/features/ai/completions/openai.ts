@@ -205,7 +205,7 @@ export async function OpenAIChatCompletion(request: FastifyRequest, reply: Fasti
           else
             finish_reason = (choice as ChatChoice).finishReason
 
-          if (!content || !finish_reason)
+          if (!content && !finish_reason)
             continue // ignore this line
           const res: Record<string, unknown> = { text: content || '' }
           if (finish_reason) {
