@@ -239,11 +239,11 @@ export const COHERE_SERVICE_PROVIDERS: RaycastAIModels = [
 ]
 
 export const RAYCAST_DEFAULT_MODELS = {
-  chat: 'openai-gpt-3.5-turbo',
-  quick_ai: 'openai-gpt-3.5-turbo',
-  commands: 'openai-gpt-3.5-turbo',
-  api: 'openai-gpt-3.5-turbo',
-  emoji_search: 'openai-gpt-3.5-turbo',
+  chat: 'openai-gpt-4o-mini',
+  quick_ai: 'openai-gpt-4o-mini',
+  commands: 'openai-gpt-4o-mini',
+  api: 'openai-gpt-4o-mini',
+  emoji_search: 'openai-gpt-4o-mini',
 }
 
 export const RAYCAST_GEMINI_PRO_ONLY_MODELS = {
