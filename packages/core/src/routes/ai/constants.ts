@@ -76,7 +76,7 @@ export const OPENAI_SERVICE_PROVIDERS: RaycastAIModels = [
   {
     id: 'openai-gpt-o1',
     description: 'GPT-o1 from OpenAI',
-    model: 'gpt-o1',
+    model: 'o1',
     name: 'GPT-o1',
     features: ['chat', 'quick_ai', 'commands', 'api', 'emoji_search'],
     speed: 3,
@@ -94,7 +94,7 @@ export const OPENAI_SERVICE_PROVIDERS: RaycastAIModels = [
   {
     id: 'openai-gpt-o3-mini',
     description: 'GPT-o3-mini from OpenAI',
-    model: 'gpt-o3-mini',
+    model: 'o3-mini',
     name: 'GPT-o3-mini',
     features: ['chat', 'quick_ai', 'commands', 'api', 'emoji_search'],
     speed: 3,
