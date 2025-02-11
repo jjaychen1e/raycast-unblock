@@ -80,18 +80,19 @@ type AIServiceConfigWithNoSingleModel = Omit<AIConfig, 'default' | 'temperature'
 
 function getDefaultInModels(ai: keyof AIServiceConfigWithNoSingleModel) {
   const aiConfig = (getConfig('ai') as AIServiceConfigWithNoSingleModel)?.[ai]
+  const aiConfigDisabled = (aiConfig as any)?.disable
 
-  if (aiConfig?.disable)
+  if (aiConfigDisabled)
     return RAYCAST_DEFAULT_MODELS
 
   let default_model = RAYCAST_DEFAULT_MODELS
-  let id = aiConfig?.default || RAYCAST_DEFAULT_MODELS.api
+  let id = aiConfigDisabled || RAYCAST_DEFAULT_MODELS.api
 
-  if (aiConfig?.default) {
+  if (aiConfigDisabled) {
     if (ai === 'openai') {
-      const model = (aiConfig as OpenAIServiceConfig).models?.[aiConfig.default] || {} as AIModelConfig
+      const model = (aiConfig as OpenAIServiceConfig).models?.[aiConfigDisabled] || {} as AIModelConfig
       if (model)
-        id = model.id || aiConfig.default
+        id = model.id || aiConfigDisabled
     }
   }
   else {

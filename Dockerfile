@@ -10,18 +10,9 @@ COPY . .
 RUN rm -rf packages/raycast
 RUN pnpm install
 RUN pnpm build:core
-RUN pnpm bundle
-
-FROM --platform=$BUILDPLATFORM alpine:3.19 AS runner
-
-RUN apk add --no-cache libstdc++
-
-WORKDIR /app
-
-COPY --from=builder /app/dist/raycast-unblock-app .
 
 ENV TZ=Asia/Shanghai
 
 EXPOSE 3000
 
-ENTRYPOINT ["./raycast-unblock-app"]
+ENTRYPOINT ["node", "--enable-source-maps", "./packages/core/dist/index.cjs"]

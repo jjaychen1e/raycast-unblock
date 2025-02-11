@@ -32,7 +32,6 @@
     "dist"
   ],
   "scripts": {
-    "bundle": "sh scripts/single-application.sh",
     "build:core": "pnpm -C packages/core build",
     "build:docs": "pnpm -C packages/docs docs:build",
     "build:ray": "pnpm -C packages/raycast build",
