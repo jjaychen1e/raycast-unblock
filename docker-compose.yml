@@ -6,7 +6,7 @@ services:
     # ## You can also add arguments to the command line here, such as the following
     # ## If you need to use config.toml file, please uncomment the following line ####
     command: --config=./configs/config.toml
-    image: wibuswee/raycast-unblock:latest
+    build: .
     environment:
       - TZ=Asia/Shanghai
       # ## You can also use proxy settings here, such as the following
