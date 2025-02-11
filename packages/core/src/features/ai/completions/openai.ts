@@ -45,7 +45,7 @@ export async function OpenAIChatCompletion(request: FastifyRequest, reply: Fasti
     if ('command_instructions' in message.content) {
       openai_message.push(
         {
-          role: 'system',
+          role: 'user',
           content: message.content.command_instructions,
         },
       )
