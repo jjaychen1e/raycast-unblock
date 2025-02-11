@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM node:21-alpine AS builder
+FROM node:22-alpine 
 
 RUN apk add make g++ alpine-sdk python3 py3-pip
 RUN npm i -g pnpm
